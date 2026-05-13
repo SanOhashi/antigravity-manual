@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>対応言語一覧 - Antigravity 総合運用ガイド</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --nav-width: 260px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            display: flex;
+        }
+
+        /* Global Sidebar (Left) */
+        .global-sidebar {
+            width: var(--nav-width);
+            height: 100vh;
+            background: #111827;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu { list-style: none; }
+        .nav-item { margin-bottom: 0.5rem; }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+        .nav-link.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 600; }
+
+        /* Main Content */
+        .main-wrapper {
+            margin-left: var(--nav-width);
+            flex: 1;
+            min-height: 100vh;
+            padding: 4rem;
+            max-width: 1000px;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: #fff; }
+
+        .intro { color: var(--text-muted); margin-bottom: 3rem; font-size: 1.1rem; }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .lang-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .lang-card h2 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-card h2::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .lang-list {
+            list-style: none;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .lang-list li {
+            margin-bottom: 0.25rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .lang-list li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .alert-box {
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #cbd5e1;
+        }
+
+        .alert-box h3 { color: var(--primary); margin-bottom: 1rem; }
+
+        footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+
+<aside class="global-sidebar">
+    <div class="sidebar-logo">Antigravity Guide</div>
+    <nav>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="antigravity_guide_site.html" class="nav-link">🏠 総合運用ガイド</a>
+            </li>
+            <li class="nav-item">
+                <a href="glossary.html" class="nav-link">📖 用語説明</a>
+            </li>
+            <li class="nav-item">
+                <a href="structure.html" class="nav-link">🏗️ 構造説明</a>
+            </li>
+            <li class="nav-item">
+                <a href="languages.html" class="nav-link active">💻 対応言語一覧</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<div class="main-wrapper">
+    <h1>対応言語一覧</h1>
+    <p class="intro">Antigravityは主要なプログラミング言語から最新のフレームワークまで、幅広くサポートしています。</p>
+
+    <div class="lang-grid">
+        <div class="lang-card">
+            <h2>フロントエンド</h2>
+            <ul class="lang-list">
+                <li>HTML5 / CSS3 (Sass, Less)</li>
+                <li>JavaScript (ES6+)</li>
+                <li>TypeScript (推奨)</li>
+                <li>React / Next.js</li>
+                <li>Vue.js / Nuxt.js</li>
+                <li>Tailwind CSS</li>
+            </ul>
+        </div>
+
+        <div class="lang-card">
+            <h2>バックエンド</h2>
+            <ul class="lang-list">
+                <li>Node.js (Express, NestJS)</li>
+                <li>Python (Django, FastAPI)</li>
+                <li>Go</li>
+                <li>Ruby (on Rails)</li>
+                <li>PHP (Laravel)</li>
+                <li>Java (Spring Boot)</li>
+            </ul>
+        </div>
+
+        <div class="lang-card">
+            <h2>インフラ・ツール</h2>
+            <ul class="lang-list">
+                <li>Docker / Docker Compose</li>
+                <li>Terraform</li>
+                <li>GitHub Actions / GitLab CI</li>
+                <li>SQL (PostgreSQL, MySQL)</li>
+                <li>NoSQL (MongoDB, Redis)</li>
+            </ul>
+        </div>
+
+        <div class="lang-card">
+            <h2>モバイル・その他</h2>
+            <ul class="lang-list">
+                <li>Flutter (Dart)</li>
+                <li>React Native</li>
+                <li>Swift / Kotlin</li>
+                <li>Markdown (ドキュメント)</li>
+                <li>Shell Script (Bash/Zsh)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="alert-box">
+        <h3>未記載の言語について</h3>
+        <p>Antigravityは高度な推論能力を備えているため、上記に記載のないマイナーな言語や、独自のDSL（ドメイン固有言語）についても、コードのパターンを読み取ることで対応可能な場合があります。</p>
+        <p style="margin-top: 1rem;">特定のライブラリやフレームワークの知識をAIに強化したい場合は、<code>AGENTS.md</code> にそのドキュメントのURLや要約を記述することを推奨します。</p>
+    </div>
+
+    <footer>
+        &copy; 2026 Antigravity Support Team | Technical Support
+    </footer>
+</div>
+
+</body>
+</html>

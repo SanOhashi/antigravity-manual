@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity 総合運用ガイド</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --global-nav-width: 260px;
+            --toc-width: 240px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            display: flex;
+        }
+
+        /* Global Sidebar (Left) */
+        .global-sidebar {
+            width: var(--global-nav-width);
+            height: 100vh;
+            background: #111827;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu { list-style: none; }
+        .nav-item { margin-bottom: 0.5rem; }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+        .nav-link.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 600; }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            margin-left: var(--global-nav-width);
+            flex: 1;
+            min-width: 0;
+        }
+
+        header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: -40px auto 100px;
+            padding: 0 2rem;
+            gap: 2.5rem;
+        }
+
+        main { flex: 1; min-width: 0; }
+
+        /* TOC Sidebar (Right) */
+        .toc-sidebar {
+            width: var(--toc-width);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        @media (min-width: 1300px) { .toc-sidebar { display: block; } }
+
+        .toc-title { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+        .toc-list { list-style: none; }
+        .toc-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.4rem 0.75rem; border-radius: 6px; transition: 0.2s; }
+        .toc-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+        .toc-link.active { color: white; background: var(--primary); font-weight: 600; }
+
+        /* Content Sections */
+        section { background-color: var(--card-bg); border-radius: 24px; padding: 3rem; margin-bottom: 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05); scroll-margin-top: 2rem; }
+        h2 { font-size: 1.75rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; color: #fff; }
+        h2::before { content: ''; display: block; width: 4px; height: 24px; background: var(--primary); border-radius: 2px; }
+        h3 { font-size: 1.15rem; margin: 1.5rem 0 1rem; color: #818cf8; }
+        p { margin-bottom: 1.25rem; color: #cbd5e1; }
+        ul, ol { margin-bottom: 1.25rem; padding-left: 1.25rem; color: #cbd5e1; }
+        li { margin-bottom: 0.5rem; }
+        .step-card { background: rgba(15, 23, 42, 0.4); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.03); }
+        .badge { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-right: 0.5rem; }
+        .alert { padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid; background: rgba(15, 23, 42, 0.6); }
+        .alert-info { border-color: #3b82f6; }
+        .alert-danger { border-color: var(--danger); }
+        pre { background: #0f172a; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.25rem; }
+        code { color: #fbbf24; font-size: 0.85rem; }
+
+        /* Inline Content Area */
+        .content-area { margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.15); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.03); }
+
+        footer { padding: 4rem; text-align: center; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<aside class="global-sidebar">
+    <div class="sidebar-logo">Antigravity Guide</div>
+    <nav>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="antigravity_guide_site.html" class="nav-link active">🏠 総合運用ガイド</a>
+            </li>
+            <li class="nav-item">
+                <a href="glossary.html" class="nav-link">📖 用語説明</a>
+            </li>
+            <li class="nav-item">
+                <a href="structure.html" class="nav-link">🏗️ 構造説明</a>
+            </li>
+            <li class="nav-item">
+                <a href="languages.html" class="nav-link">💻 対応言語一覧</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<div class="main-wrapper">
+    <header>
+        <h1>Antigravity 総合運用ガイド</h1>
+        <p class="subtitle">設定テンプレートを用いた迅速なセットアップと、Agentic AI開発のベストプラクティスを網羅した運用マニュアルです。</p>
+    </header>
+
+    <div class="container">
+        <main>
+            <!-- Precautions -->
+            <section id="precautions">
+                <h2>利用上の重大な注意点</h2>
+                <div class="alert alert-danger">
+                    <h4>機密情報の漏洩リスク</h4>
+                    <p>APIキーや個人情報が直書きされていないか点検してください。</p>
+                    <div class="content-area">
+                        <p>AIはファイルを読み取ります。AWSキー、DBパスワード、顧客データは必ず <code>.env</code> に分離してください。</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3>出力結果の信頼性とハルシネーション</h3>
+                    <p>AIは嘘をつくことがあります。必ず人間がレビューしてください。</p>
+                    <div class="content-area">
+                        <p>存在しない関数の捏造などに注意し、ユニットテストによる機械的検証を併用してください。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup -->
+            <section id="setup">
+                <h2>初期セットアップとテンプレート配備</h2>
+                <div class="step-card">
+                    <h3><span class="badge">1</span> インストーラーの実行</h3>
+                    <div class="content-area">
+                        <p>OSに合わせたインストーラーを実行し、「PATHに追加」を有効にしてください。Windowsの場合は管理者権限での実行を推奨します。</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="badge">2</span> 日本語化設定 (Japanese Pack 導入)</h3>
+                    <p>拡張機能から「Japanese Language Pack」を導入してください。</p>
+                    <div class="content-area">
+                        <h4>導入ステップ</h4>
+                        <ol>
+                            <li>「Extensions」アイコンをクリック</li>
+                            <li><code>Japanese Language Pack</code> を検索</li>
+                            <li>Microsoft公式版をInstall</li>
+                            <li>再起動して適用</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="badge">3</span> 設定テンプレートのコピー</h3>
+                    <p><code>.antigravity_config/</code> をプロジェクトルートに配置します。</p>
+                    <div class="content-area">
+                        <p>このテンプレートには、テレメトリ無効化、日本語回答ルール（AGENTS.md）、指示書雛形（instructions.md）が事前定義されています。</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="badge">4</span> Antigravityへの適用命令</h3>
+                    <pre><code>フォルダ「.antigravity_config」内のファイルを現在のワークスペースに適用し、AGENTS.mdの必須ルールを反映してください。</code></pre>
+                </div>
+            </section>
+
+            <!-- System Build -->
+            <section id="system-build">
+                <h2>システム構築フロー</h2>
+                <div class="step-card">
+                    <h3>ステップ 1: 要件定義 (instructions.md)</h3>
+                    <div class="content-area">
+                        <p>ファイル形式での具体的指示はAIの理解を安定させます。目的、技術制約、背景情報を記述してください。</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3>ステップ 2: 計画策定 (Planning Mode)</h3>
+                    <div class="content-area">
+                        <p>AIに「実装計画を立ててください」と指示し、<code>implementation_plan.md</code> を承認して実行を開始します。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Essential Settings -->
+            <section id="essential-settings">
+                <h2>必要な重要設定</h2>
+                <div class="step-card">
+                    <h3>モデル選択（Model Selection）</h3>
+                    <div class="content-area">
+                        <p>ロジック修正には <strong>Pro</strong>、単純作業には <strong>Flash</strong> を使い分けることで効率的に開発できます。</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3>ツール実行権限（Auto-Approve）</h3>
+                    <div class="content-area">
+                        <p>読み取り操作は自動承認、書き込み操作は手動承認に設定することを推奨します。</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="toc-sidebar">
+            <div class="toc-title">セクション目次</div>
+            <ul class="toc-list">
+                <li><a href="#precautions" class="toc-link">利用上の重大な注意点</a></li>
+                <li><a href="#setup" class="toc-link">初期セットアップ</a></li>
+                <li><a href="#system-build" class="toc-link">システム構築フロー</a></li>
+                <li><a href="#essential-settings" class="toc-link">必要な重要設定</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>&copy; 2026 Antigravity Support Team</footer>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll("section");
+        const tocLinks = document.querySelectorAll(".toc-link");
+        const updateActiveToc = () => {
+            let current = "";
+            const scrollPosition = window.scrollY + 100;
+            sections.forEach((section) => {
+                if (scrollPosition >= section.offsetTop) current = section.getAttribute("id");
+            });
+            tocLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (current && link.getAttribute("href").includes(current)) link.classList.add("active");
+            });
+        };
+        window.addEventListener('scroll', updateActiveToc);
+        updateActiveToc();
+    });
+</script>
+</body>
+</html>
