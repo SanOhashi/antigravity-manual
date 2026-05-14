@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity 総合運用ガイド - Why & Logic</title>
+    <title>Antigravity 総合運用ガイド</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -148,26 +148,26 @@
         h2::before { content: ''; display: block; width: 4px; height: 24px; background: var(--primary); border-radius: 2px; }
         h3 { font-size: 1.15rem; margin: 1.5rem 0 1rem; color: #818cf8; }
         p { margin-bottom: 1.25rem; color: #cbd5e1; }
+        ul, ol { margin-bottom: 1.25rem; padding-left: 1.25rem; color: #cbd5e1; }
+        li { margin-bottom: 0.5rem; }
         
-        .logic-block { 
+        .step-card { background: rgba(15, 23, 42, 0.4); padding: 2.5rem; border-radius: 16px; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.03); }
+        .badge { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-right: 0.5rem; }
+        
+        /* Revised Reason Box */
+        .reason-text { 
             margin-top: 1rem; 
-            padding: 1.25rem; 
+            padding: 1rem; 
             background: rgba(99, 102, 241, 0.05); 
-            border-radius: 12px; 
-            border: 1px solid rgba(99, 102, 241, 0.2); 
-        }
-        .logic-header {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            display: block;
+            border-radius: 8px; 
+            font-size: 0.9rem;
+            border-left: 3px solid var(--primary);
         }
 
         .alert { padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid; background: rgba(15, 23, 42, 0.6); }
         .alert-danger { border-color: var(--danger); }
+        pre { background: #0f172a; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.25rem; }
+        code { color: #fbbf24; font-size: 0.85rem; }
 
         footer { padding: 4rem; text-align: center; color: var(--text-muted); }
     </style>
@@ -188,58 +188,68 @@
 <div class="main-wrapper">
     <header>
         <h1>Antigravity 総合運用ガイド</h1>
-        <p class="subtitle">なぜこのルールが必要なのか？背景にある技術的ロジックとベストプラクティスを解説します。</p>
+        <p class="subtitle">具体的な手順とその背景にある理由を統合した、実用的な運用マニュアルです。</p>
     </header>
 
     <div class="container">
         <main>
+            <!-- Precautions -->
             <section id="precautions">
                 <h2>利用上の重大な注意点</h2>
                 <div class="alert alert-danger">
-                    <h4>なぜ機密情報を完全に分離すべきなのか</h4>
-                    <p>AIは文脈にあるコードを学習・参照するため、一度コード内にパスワードが混入すると、<strong>AIが新しいコードを生成する際にその機密情報を「正しい書き方」として再利用してしまうリスク</strong>があります。</p>
-                    <div class="logic-block">
-                        <span class="logic-header">Technical Logic</span>
-                        <p><code>.env</code> への分離は、AIによる「機密情報の学習と再出力」の連鎖を物理的に断ち切るために不可欠な措置です。</p>
-                    </div>
+                    <h4>機密情報の漏洩リスクと完全分離の徹底</h4>
+                    <p>AIは文脈にあるコードを学習・参照するため、一度コード内にパスワードが混入すると、AIが新しいコードを生成する際にその情報を「正しいパターン」として再利用（再生成）してしまうリスクがあります。<strong>これを防ぐには <code>.env</code> への分離が不可欠であり、AIによる「機密情報の学習と再出力」の連鎖を物理的に断ち切る必要があります。</strong></p>
                 </div>
             </section>
 
+            <!-- Setup -->
             <section id="setup">
-                <h2>セットアップ手順と根拠</h2>
+                <h2>初期セットアップの手順と理由</h2>
+                
                 <div class="step-card">
-                    <h3>Antigravity起動後のワークスペース設定</h3>
-                    <p>AIがプロジェクト全体を正しく把握するためには、「どのフォルダを作業の基点（ルート）にするか」を明確にする必要があります。</p>
-                    <div class="logic-block">
-                        <span class="logic-header">Flow & Logic</span>
-                        <ol style="margin-left: 1.5rem; color: #cbd5e1;">
-                            <li><strong>フォルダを開く:</strong> VS Codeの <code>File > Open Folder...</code> から、プロジェクトのルートフォルダを直接開きます。</li>
-                            <li><strong>「信頼」の承認:</strong> <code>Do you trust the authors...</code> と出たら [Yes] を選択します。※これをしないとAIツールの実行が制限されます。</li>
-                            <li><strong>AIの視界を確認:</strong> サイドバーのファイルエクスプローラーに、目的のフォルダ構成が表示されていることを確認します。</li>
-                        </ol>
-                        <p style="margin-top: 1rem;"><strong>なぜフォルダ単位で開くのか：</strong>単一のファイルだけを開くと、AIは「隣にあるファイル」や「共通設定」を見失い、推論精度が著しく低下するためです。</p>
-                    </div>
+                    <h3><span class="badge">1</span> インストーラーの実行</h3>
+                    <p>OSに合わせたインストーラーを実行し、「PATHに追加」を有効にしてください。<strong>PATHを通すことで、どのディレクトリからでもAIツールが起動可能になり、AIによるターミナル操作の代行がシステム的に正しく動作するようになります。</strong></p>
                 </div>
 
                 <div class="step-card">
-                    <h3>なぜ AGENTS.md が不可欠なのか</h3>
-                    <p>AIのデフォルト知識は一般的すぎて、プロジェクト固有の「暗黙の了解」を知りません。AGENTS.mdがない状態は、<strong>「自社のルールを全く知らない新人に、指示書なしで仕事を頼んでいる状態」</strong>と同じです。</p>
-                    <div class="logic-block">
-                        <span class="logic-header">Logic</span>
-                        <p>AGENTS.mdによりAIの思考に強力な制約をかけます。これにより、レビューの手間を80%削減し、最初からプロジェクト基準に合致したコードを得られます。</p>
-                    </div>
+                    <h3><span class="badge">2</span> Antigravity起動後のワークスペース設定</h3>
+                    <p>AIがプロジェクト全体を正しく把握するため、以下の手順で作業フォルダを開きます。</p>
+                    <ol style="margin: 1rem 0 1rem 1.5rem; color: #cbd5e1;">
+                        <li>VS Codeの <code>File > Open Folder...</code> からプロジェクトのルートを開く</li>
+                        <li><code>Do you trust the authors...</code> で [Yes] を選択</li>
+                        <li>サイドバーにフォルダ構成が表示されていることを確認</li>
+                    </ol>
+                    <p class="reason-text">単一のファイル単位ではなくフォルダ全体で開くことで、AIは周辺ファイルや共通設定を文脈として読み込めるようになり、推論精度と整合性が劇的に向上します。</p>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="badge">3</span> 日本語化設定 (Japanese Pack 導入)</h3>
+                    <p>拡張機能から以下の手順で導入します。</p>
+                    <ul style="margin: 1rem 0 1rem 1.5rem; color: #cbd5e1;">
+                        <li>「Extensions」アイコンで <code>Japanese Language Pack</code> を検索して Install</li>
+                        <li>再起動して適用</li>
+                    </ul>
+                    <p class="reason-text">UIだけでなくAIの内部的な思考プロセスを日本語に固定し、プロンプトの意図と回答の齟齬を最小化するために不可欠な設定です。</p>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="badge">4</span> 設定テンプレートの適用</h3>
+                    <p><code>.antigravity_config/</code> をルートに配置し、以下の命令をチャットに送信してプロジェクト固有のルールをAIに教え込みます。</p>
+                    <pre><code>フォルダ「.antigravity_config」内のファイルを現在のワークスペースに適用し、AGENTS.mdの必須ルールを反映してください。</code></pre>
+                    <p class="reason-text">AIはデフォルトで一般的な知識しか持たないため、この設定で「プロジェクト憲法」を与えます。これにより自社ルールを無視した不適切なコード生成を防ぎ、人間のレビュー工数を大幅に削減します。</p>
                 </div>
             </section>
 
+            <!-- System Build -->
             <section id="system-build">
-                <h2>開発フローの根拠</h2>
+                <h2>開発フローの標準化</h2>
                 <div class="step-card">
-                    <h3>なぜ Planning Mode で計画を立てるのか</h3>
-                    <p>いきなりコードを書き始めると、AIは「全体的な整合性」を見失うことがあります。</p>
-                    <div class="logic-block">
-                        <span class="logic-header">System Logic</span>
-                        <p>計画を立てることで、AIは修正前にすべての依存関係をスキャンし、<strong>不必要なトークン消費を抑え、最もシンプルで影響の少ない修正ルート</strong>を特定できます。</p>
-                    </div>
+                    <h3>Planning Mode での計画策定</h3>
+                    <p>いきなりコードを修正せず、まず計画書（Implementation Plan）を確認し承認します。<strong>修正前に全依存関係をスキャンさせることで、デグレードを防ぎ、最小の修正ルートで品質を担保するためです。</strong></p>
+                </div>
+                <div class="step-card">
+                    <h3>instructions.md による指示の永続化</h3>
+                    <p>重要な要件はチャットではなく <code>instructions.md</code> に記述します。<strong>会話の長期化による要件の「聞き逃し」を防ぎ、AIが常に最新の仕様書を直視している状態を維持するためです。</strong></p>
                 </div>
             </section>
         </main>
@@ -248,8 +258,8 @@
             <div class="toc-title">目次</div>
             <ul class="toc-list">
                 <li><a href="#precautions" class="toc-link">重大な注意点</a></li>
-                <li><a href="#setup" class="toc-link">セットアップの根拠</a></li>
-                <li><a href="#system-build" class="toc-link">開発フローの根拠</a></li>
+                <li><a href="#setup" class="toc-link">初期セットアップ</a></li>
+                <li><a href="#system-build" class="toc-link">開発フロー</a></li>
             </ul>
         </aside>
     </div>
@@ -257,5 +267,24 @@
     <footer>&copy; 2026 Antigravity Support Team</footer>
 </div>
 
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll("section");
+        const tocLinks = document.querySelectorAll(".toc-link");
+        const updateActiveToc = () => {
+            let current = "";
+            const scrollPosition = window.scrollY + 100;
+            sections.forEach((section) => {
+                if (scrollPosition >= section.offsetTop) current = section.getAttribute("id");
+            });
+            tocLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (current && link.getAttribute("href").includes(current)) link.classList.add("active");
+            });
+        };
+        window.addEventListener('scroll', updateActiveToc);
+        updateActiveToc();
+    });
+</script>
 </body>
 </html>
