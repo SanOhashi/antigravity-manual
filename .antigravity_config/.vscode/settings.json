@@ -1,0 +1,12 @@
+{
+    // VS Code テレメトリ設定 (必須事項として無効化を推奨)
+    "telemetry.telemetryLevel": "off",
+
+    // 言語設定 (日本語パック導入後の推奨設定)
+    "locale": "ja",
+
+    // その他推奨設定（コメントアウト）
+    // "files.autoSave": "onFocusChange",
+    // "editor.fontSize": 14,
+    // "editor.formatOnSave": true
+}
