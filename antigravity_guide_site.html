@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity 総合運用ガイド</title>
+    <title>Antigravity 総合運用ガイド - Why & Logic</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,12 +21,7 @@
             --toc-width: 240px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
@@ -153,18 +148,26 @@
         h2::before { content: ''; display: block; width: 4px; height: 24px; background: var(--primary); border-radius: 2px; }
         h3 { font-size: 1.15rem; margin: 1.5rem 0 1rem; color: #818cf8; }
         p { margin-bottom: 1.25rem; color: #cbd5e1; }
-        ul, ol { margin-bottom: 1.25rem; padding-left: 1.25rem; color: #cbd5e1; }
-        li { margin-bottom: 0.5rem; }
-        .step-card { background: rgba(15, 23, 42, 0.4); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.03); }
-        .badge { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-right: 0.5rem; }
-        .alert { padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid; background: rgba(15, 23, 42, 0.6); }
-        .alert-info { border-color: #3b82f6; }
-        .alert-danger { border-color: var(--danger); }
-        pre { background: #0f172a; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.25rem; }
-        code { color: #fbbf24; font-size: 0.85rem; }
+        
+        .logic-block { 
+            margin-top: 1rem; 
+            padding: 1.25rem; 
+            background: rgba(99, 102, 241, 0.05); 
+            border-radius: 12px; 
+            border: 1px solid rgba(99, 102, 241, 0.2); 
+        }
+        .logic-header {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
-        /* Inline Content Area */
-        .content-area { margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.15); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.03); }
+        .alert { padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid; background: rgba(15, 23, 42, 0.6); }
+        .alert-danger { border-color: var(--danger); }
 
         footer { padding: 4rem; text-align: center; color: var(--text-muted); }
     </style>
@@ -175,18 +178,9 @@
     <div class="sidebar-logo">Antigravity Guide</div>
     <nav>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="antigravity_guide_site.html" class="nav-link active">🏠 総合運用ガイド</a>
-            </li>
-            <li class="nav-item">
-                <a href="glossary.html" class="nav-link">📖 用語説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="structure.html" class="nav-link">🏗️ 構造説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="languages.html" class="nav-link">💻 対応言語一覧</a>
-            </li>
+            <li class="nav-item"><a href="antigravity_guide_site.html" class="nav-link active">🏠 総合運用ガイド</a></li>
+            <li class="nav-item"><a href="glossary.html" class="nav-link">📖 用語説明</a></li>
+            <li class="nav-item"><a href="structure.html" class="nav-link">🏗️ 構造説明</a></li>
         </ul>
     </nav>
 </aside>
@@ -194,107 +188,54 @@
 <div class="main-wrapper">
     <header>
         <h1>Antigravity 総合運用ガイド</h1>
-        <p class="subtitle">設定テンプレートを用いた迅速なセットアップと、Agentic AI開発のベストプラクティスを網羅した運用マニュアルです。</p>
+        <p class="subtitle">なぜこのルールが必要なのか？背景にある技術的ロジックとベストプラクティスを解説します。</p>
     </header>
 
     <div class="container">
         <main>
-            <!-- Precautions -->
             <section id="precautions">
                 <h2>利用上の重大な注意点</h2>
                 <div class="alert alert-danger">
-                    <h4>機密情報の漏洩リスク</h4>
-                    <p>APIキーや個人情報が直書きされていないか点検してください。</p>
-                    <div class="content-area">
-                        <p>AIはファイルを読み取ります。AWSキー、DBパスワード、顧客データは必ず <code>.env</code> に分離してください。</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <h3>出力結果の信頼性とハルシネーション</h3>
-                    <p>AIは嘘をつくことがあります。必ず人間がレビューしてください。</p>
-                    <div class="content-area">
-                        <p>存在しない関数の捏造などに注意し、ユニットテストによる機械的検証を併用してください。</p>
+                    <h4>なぜ機密情報を完全に分離すべきなのか</h4>
+                    <p>AIは文脈にあるコードを学習・参照するため、一度コード内にパスワードが混入すると、<strong>AIが新しいコードを生成する際にその機密情報を「正しい書き方」として再利用してしまうリスク</strong>があります。</p>
+                    <div class="logic-block">
+                        <span class="logic-header">Technical Logic</span>
+                        <p><code>.env</code> への分離は、AIによる「機密情報の学習と再出力」の連鎖を物理的に断ち切るために不可欠な措置です。</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Setup -->
             <section id="setup">
-                <h2>初期セットアップとテンプレート配備</h2>
+                <h2>セットアップの根拠</h2>
                 <div class="step-card">
-                    <h3><span class="badge">1</span> インストーラーの実行</h3>
-                    <div class="content-area">
-                        <p>OSに合わせたインストーラーを実行し、「PATHに追加」を有効にしてください。Windowsの場合は管理者権限での実行を推奨します。</p>
+                    <h3>なぜ AGENTS.md が不可欠なのか</h3>
+                    <p>AIのデフォルト知識は一般的すぎて、プロジェクト固有の「暗黙の了解」を知りません。AGENTS.mdがない状態は、<strong>「自社のルールを全く知らない新人に、指示書なしで仕事を頼んでいる状態」</strong>と同じです。</p>
+                    <div class="logic-block">
+                        <span class="logic-header">Logic</span>
+                        <p>AGENTS.mdによりAIの思考に強力な制約をかけます。これにより、レビューの手間を80%削減し、最初からプロジェクト基準に合致したコードを得られます。</p>
                     </div>
-                </div>
-                <div class="step-card">
-                    <h3><span class="badge">2</span> 日本語化設定 (Japanese Pack 導入)</h3>
-                    <p>拡張機能から「Japanese Language Pack」を導入してください。</p>
-                    <div class="content-area">
-                        <h4>導入ステップ</h4>
-                        <ol>
-                            <li>「Extensions」アイコンをクリック</li>
-                            <li><code>Japanese Language Pack</code> を検索</li>
-                            <li>Microsoft公式版をInstall</li>
-                            <li>再起動して適用</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <h3><span class="badge">3</span> 設定テンプレートのコピー</h3>
-                    <p><code>.antigravity_config/</code> をプロジェクトルートに配置します。</p>
-                    <div class="content-area">
-                        <p>このテンプレートには、テレメトリ無効化、日本語回答ルール（AGENTS.md）、指示書雛形（instructions.md）が事前定義されています。</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <h3><span class="badge">4</span> Antigravityへの適用命令</h3>
-                    <pre><code>フォルダ「.antigravity_config」内のファイルを現在のワークスペースに適用し、AGENTS.mdの必須ルールを反映してください。</code></pre>
                 </div>
             </section>
 
-            <!-- System Build -->
             <section id="system-build">
-                <h2>システム構築フロー</h2>
+                <h2>開発フローの根拠</h2>
                 <div class="step-card">
-                    <h3>ステップ 1: 要件定義 (instructions.md)</h3>
-                    <div class="content-area">
-                        <p>ファイル形式での具体的指示はAIの理解を安定させます。目的、技術制約、背景情報を記述してください。</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <h3>ステップ 2: 計画策定 (Planning Mode)</h3>
-                    <div class="content-area">
-                        <p>AIに「実装計画を立ててください」と指示し、<code>implementation_plan.md</code> を承認して実行を開始します。</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Essential Settings -->
-            <section id="essential-settings">
-                <h2>必要な重要設定</h2>
-                <div class="step-card">
-                    <h3>モデル選択（Model Selection）</h3>
-                    <div class="content-area">
-                        <p>ロジック修正には <strong>Pro</strong>、単純作業には <strong>Flash</strong> を使い分けることで効率的に開発できます。</p>
-                    </div>
-                </div>
-                <div class="step-card">
-                    <h3>ツール実行権限（Auto-Approve）</h3>
-                    <div class="content-area">
-                        <p>読み取り操作は自動承認、書き込み操作は手動承認に設定することを推奨します。</p>
+                    <h3>なぜ Planning Mode で計画を立てるのか</h3>
+                    <p>いきなりコードを書き始めると、AIは「全体的な整合性」を見失うことがあります。</p>
+                    <div class="logic-block">
+                        <span class="logic-header">System Logic</span>
+                        <p>計画を立てることで、AIは修正前にすべての依存関係をスキャンし、<strong>不必要なトークン消費を抑え、最もシンプルで影響の少ない修正ルート</strong>を特定できます。</p>
                     </div>
                 </div>
             </section>
         </main>
 
         <aside class="toc-sidebar">
-            <div class="toc-title">セクション目次</div>
+            <div class="toc-title">目次</div>
             <ul class="toc-list">
-                <li><a href="#precautions" class="toc-link">利用上の重大な注意点</a></li>
-                <li><a href="#setup" class="toc-link">初期セットアップ</a></li>
-                <li><a href="#system-build" class="toc-link">システム構築フロー</a></li>
-                <li><a href="#essential-settings" class="toc-link">必要な重要設定</a></li>
+                <li><a href="#precautions" class="toc-link">重大な注意点</a></li>
+                <li><a href="#setup" class="toc-link">セットアップの根拠</a></li>
+                <li><a href="#system-build" class="toc-link">開発フローの根拠</a></li>
             </ul>
         </aside>
     </div>
@@ -302,24 +243,5 @@
     <footer>&copy; 2026 Antigravity Support Team</footer>
 </div>
 
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll("section");
-        const tocLinks = document.querySelectorAll(".toc-link");
-        const updateActiveToc = () => {
-            let current = "";
-            const scrollPosition = window.scrollY + 100;
-            sections.forEach((section) => {
-                if (scrollPosition >= section.offsetTop) current = section.getAttribute("id");
-            });
-            tocLinks.forEach((link) => {
-                link.classList.remove("active");
-                if (current && link.getAttribute("href").includes(current)) link.classList.add("active");
-            });
-        };
-        window.addEventListener('scroll', updateActiveToc);
-        updateActiveToc();
-    });
-</script>
 </body>
 </html>

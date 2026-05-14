@@ -3,37 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>構造説明 - Antigravity 総合運用ガイド</title>
+    <title>構造説明 - Logical Hierarchy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
             --bg: #0f172a;
             --card-bg: #1e293b;
             --text: #f8fafc;
             --text-muted: #94a3b8;
-            --accent: #10b981;
-            --danger: #ef4444;
             --nav-width: 260px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-            display: flex;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.8; display: flex; }
 
         /* Global Sidebar (Left) */
         .global-sidebar {
@@ -75,20 +60,19 @@
         .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
         .nav-link.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 600; }
 
-        /* Main Content */
+        /* Main Wrapper */
         .main-wrapper {
             margin-left: var(--nav-width);
             flex: 1;
-            min-height: 100vh;
             padding: 4rem;
             max-width: 1000px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; color: #fff; }
 
         .structure-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 2.5rem;
             margin-bottom: 3rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -109,40 +93,24 @@
 
         .tree-comment { color: var(--text-muted); font-style: italic; margin-left: 1rem; }
 
-        .file-list {
-            list-style: none;
-            margin-top: 1rem;
+        .logic-alert {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
         }
 
-        .file-item {
-            display: flex;
-            gap: 1.5rem;
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .logic-title {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
-        .file-item:last-child { border-bottom: none; }
-
-        .file-name {
-            font-family: 'Consolas', monospace;
-            color: #fbbf24;
-            min-width: 200px;
-            font-weight: 600;
-        }
-
-        .file-desc { color: #cbd5e1; font-size: 0.95rem; }
-
-        .alert {
-            padding: 1.25rem;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            border-left: 4px solid #3b82f6;
-            background: rgba(59, 130, 246, 0.05);
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+        footer { margin-top: 4rem; text-align: center; color: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -151,82 +119,32 @@
     <div class="sidebar-logo">Antigravity Guide</div>
     <nav>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="antigravity_guide_site.html" class="nav-link">🏠 総合運用ガイド</a>
-            </li>
-            <li class="nav-item">
-                <a href="glossary.html" class="nav-link">📖 用語説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="structure.html" class="nav-link active">🏗️ 構造説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="languages.html" class="nav-link">💻 対応言語一覧</a>
-            </li>
+            <li class="nav-item"><a href="antigravity_guide_site.html" class="nav-link">🏠 総合運用ガイド</a></li>
+            <li class="nav-item"><a href="glossary.html" class="nav-link">📖 用語説明</a></li>
+            <li class="nav-item"><a href="structure.html" class="nav-link active">🏗️ 構造説明</a></li>
         </ul>
     </nav>
 </aside>
 
 <div class="main-wrapper">
     <h1>構造説明</h1>
-    <p style="color: var(--text-muted); margin-bottom: 3rem;">Antigravityが認識するワークスペースのディレクトリ構造と、各ファイルの配置・役割について解説します。</p>
+    <p style="color: var(--text-muted); margin-bottom: 3rem;">AIが情報を解析する際の「論理的階層」に基づいた配置を解説します。</p>
 
     <div class="structure-card">
-        <h2>推奨されるディレクトリ構造</h2>
-        <p>Antigravityを導入したプロジェクトのルートディレクトリは、以下の構成を標準とします。</p>
-        
+        <h2>解析ロジックに基づいた配置</h2>
         <pre class="tree">
 MyProject/
-├── .antigravity_config/    <span class="tree-comment">// 配布用テンプレートフォルダ</span>
-├── .vscode/               <span class="tree-comment">// エディタ固有の設定</span>
-│   └── settings.json      <span class="tree-comment">// テレメトリ無効化など</span>
-├── src/                   <span class="tree-comment">// ソースコード本体</span>
-├── docs/                  <span class="tree-comment">// 設計書・仕様書</span>
-├── AGENTS.md              <span class="tree-comment">// エージェント定義（重要）</span>
-├── instructions.md        <span class="tree-comment">// AIへのタスク指示書</span>
-├── .env                   <span class="tree-comment">// 機密情報（AIから秘匿）</span>
-└── .gitignore             <span class="tree-comment">// AIの検索対象外設定</span></pre>
+├── AGENTS.md              <span class="tree-comment">// なぜルート：全ファイル解析の最上位制約</span>
+├── instructions.md        <span class="tree-comment">// なぜルート：現在のタスクをAIに直視させるため</span>
+└── .env                   <span class="tree-comment">// なぜ重要：AIの推論から物理的に遮断すべき領域</span></pre>
 
-        <div class="alert">
-            <strong>重要:</strong> ワークスペースの「ルート」をAntigravityに設定することで、AIはこれらすべてのファイルを相互に関連付けて解析できるようになります。
+        <div class="logic-alert">
+            <span class="logic-title">Analysis Logic</span>
+            <p>設定ファイルをルートに配置することで、AIはファイルをスキャンする際、常に「このプロジェクトの憲法（AGENTS.md）」と「現在の目的（instructions.md）」を最優先のフィルターとして適用できます。</p>
         </div>
     </div>
 
-    <div class="structure-card">
-        <h2>主要ファイルの役割</h2>
-        <ul class="file-list">
-            <li class="file-item">
-                <div class="file-name">AGENTS.md</div>
-                <div class="file-desc">プロジェクトのルートに配置。AIが「自分は何者か」「どのようなコーディング規約を守るべきか」を判断するための最優先ファイルです。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">instructions.md</div>
-                <div class="file-desc">AIに対する具体的な作業依頼を記述します。複雑なタスクを依頼する際、AIはこのファイルを読み込んで実装の拠り所とします。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">.vscode/settings.json</div>
-                <div class="file-desc">ワークスペース単位でのエディタ動作（テレメトリのオフ、自動保存の設定など）を定義します。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">.env / .gitignore</div>
-                <div class="file-desc">機密情報の分離と、AIに読み込ませたくないフォルダ（node_modules等）を除外するために適切に設定する必要があります。</div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="structure-card">
-        <h2>設定の適用範囲</h2>
-        <p>Antigravityの設定は、以下の2つのレベルで管理されます。</p>
-        <ul>
-            <li><strong>Global（グローバル）:</strong> エディタ全体の設定。日本語化ルール（User Rules）などはここで行います。</li>
-            <li><strong>Workspace（ワークスペース）:</strong> プロジェクトごとの設定。<code>AGENTS.md</code> などのファイルベースの設定がこれにあたります。</li>
-        </ul>
-        <p style="margin-top: 1rem;">基本的には「ワークスペース設定（AGENTS.md等）」が優先され、プロジェクトごとに最適なAIエージェントが構築されます。</p>
-    </div>
-
-    <footer>
-        &copy; 2026 Antigravity Support Team | System Architecture
-    </footer>
+    <footer>&copy; 2026 Antigravity Support Team</footer>
 </div>
 
 </body>
