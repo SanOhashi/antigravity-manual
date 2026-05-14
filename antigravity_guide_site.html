@@ -206,7 +206,21 @@
             </section>
 
             <section id="setup">
-                <h2>セットアップの根拠</h2>
+                <h2>セットアップ手順と根拠</h2>
+                <div class="step-card">
+                    <h3>Antigravity起動後のワークスペース設定</h3>
+                    <p>AIがプロジェクト全体を正しく把握するためには、「どのフォルダを作業の基点（ルート）にするか」を明確にする必要があります。</p>
+                    <div class="logic-block">
+                        <span class="logic-header">Flow & Logic</span>
+                        <ol style="margin-left: 1.5rem; color: #cbd5e1;">
+                            <li><strong>フォルダを開く:</strong> VS Codeの <code>File > Open Folder...</code> から、プロジェクトのルートフォルダを直接開きます。</li>
+                            <li><strong>「信頼」の承認:</strong> <code>Do you trust the authors...</code> と出たら [Yes] を選択します。※これをしないとAIツールの実行が制限されます。</li>
+                            <li><strong>AIの視界を確認:</strong> サイドバーのファイルエクスプローラーに、目的のフォルダ構成が表示されていることを確認します。</li>
+                        </ol>
+                        <p style="margin-top: 1rem;"><strong>なぜフォルダ単位で開くのか：</strong>単一のファイルだけを開くと、AIは「隣にあるファイル」や「共通設定」を見失い、推論精度が著しく低下するためです。</p>
+                    </div>
+                </div>
+
                 <div class="step-card">
                     <h3>なぜ AGENTS.md が不可欠なのか</h3>
                     <p>AIのデフォルト知識は一般的すぎて、プロジェクト固有の「暗黙の了解」を知りません。AGENTS.mdがない状態は、<strong>「自社のルールを全く知らない新人に、指示書なしで仕事を頼んでいる状態」</strong>と同じです。</p>
