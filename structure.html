@@ -3,231 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>構造説明 - Antigravity 総合運用ガイド</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>フォルダの中身 - Antigravity はじめてガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-bg: #1e293b;
             --accent: #10b981;
-            --danger: #ef4444;
-            --nav-width: 260px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            margin: 0;
             display: flex;
-        }
-
-        /* Global Sidebar (Left) */
-        .global-sidebar {
-            width: var(--nav-width);
-            height: 100vh;
-            background: #111827;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-        }
-
-        .sidebar-logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 2.5rem;
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-menu { list-style: none; }
-        .nav-item { margin-bottom: 0.5rem; }
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            transition: all 0.2s;
-        }
-        .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
-        .nav-link.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 600; }
-
-        /* Main Content */
-        .main-wrapper {
-            margin-left: var(--nav-width);
-            flex: 1;
             min-height: 100vh;
-            padding: 4rem;
-            max-width: 1000px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
+        /* 左サイドバー */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            padding: 2rem;
+        }
+
+        .sidebar h2 { font-size: 1.2rem; margin-bottom: 2rem; color: #818cf8; }
+        .nav-menu { list-style: none; padding: 0; margin: 0; }
+        .nav-item { margin-bottom: 0.75rem; }
+        .nav-link { 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            display: block; 
+            padding: 0.75rem 1rem; 
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .nav-link:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-link.active { background: var(--primary); color: white; font-weight: 600; }
+
+        /* メインコンテンツ */
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 4rem;
+            max-width: 900px;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #1e293b; }
+        .intro { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; }
 
         .structure-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 2.5rem;
             margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
         }
 
-        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; color: #818cf8; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
 
-        pre.tree {
-            background: #0f172a;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #818cf8;
+        .file-tree {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 2rem;
+            border-radius: 16px;
             font-family: 'Consolas', monospace;
-            line-height: 1.4;
+            line-height: 1.6;
             margin-bottom: 2rem;
+            font-size: 1rem;
         }
 
-        .tree-comment { color: var(--text-muted); font-style: italic; margin-left: 1rem; }
-
-        .file-list {
-            list-style: none;
-            margin-top: 1rem;
-        }
+        .folder { color: #818cf8; font-weight: 600; }
+        .file { color: #f1f5f9; }
+        .comment { color: #94a3b8; font-style: italic; margin-left: 1rem; font-size: 0.9rem; }
 
         .file-item {
             display: flex;
             gap: 1.5rem;
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+            align-items: flex-start;
         }
 
         .file-item:last-child { border-bottom: none; }
 
-        .file-name {
-            font-family: 'Consolas', monospace;
-            color: #fbbf24;
-            min-width: 200px;
-            font-weight: 600;
-        }
+        .file-icon { font-size: 1.5rem; min-width: 40px; text-align: center; }
+        .file-info h4 { margin: 0 0 0.5rem; color: #1e293b; font-size: 1.1rem; }
+        .file-info p { margin: 0; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
 
-        .file-desc { color: #cbd5e1; font-size: 0.95rem; }
-
-        .alert {
-            padding: 1.25rem;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            border-left: 4px solid #3b82f6;
-            background: rgba(59, 130, 246, 0.05);
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+        footer { margin-top: 6rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 2rem; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
 
-<aside class="global-sidebar">
-    <div class="sidebar-logo">Antigravity Guide</div>
+<aside class="sidebar">
+    <h2>Antigravity 入門</h2>
     <nav>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="antigravity_guide_site.html" class="nav-link">🏠 総合運用ガイド</a>
-            </li>
-            <li class="nav-item">
-                <a href="glossary.html" class="nav-link">📖 用語説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="structure.html" class="nav-link active">🏗️ 構造説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="languages.html" class="nav-link">💻 対応言語一覧</a>
-            </li>
+            <li class="nav-item"><a href="antigravity_guide_site.html" class="nav-link">🏠 はじめての準備</a></li>
+            <li class="nav-item"><a href="glossary.html" class="nav-link">📖 ことばの意味</a></li>
+            <li class="nav-item"><a href="structure.html" class="nav-link active">📂 フォルダの中身</a></li>
         </ul>
     </nav>
 </aside>
 
-<div class="main-wrapper">
-    <h1>構造説明</h1>
-    <p style="color: var(--text-muted); margin-bottom: 3rem;">Antigravityが認識するワークスペースのディレクトリ構造と、各ファイルの配置・役割について解説します。</p>
+<main class="main">
+    <h1>フォルダの中身</h1>
+    <p class="intro">自分のパソコンの中にどんなフォルダやファイルがあればいいのか、図解で分かりやすく説明します。</p>
 
     <div class="structure-card">
-        <h2>推奨されるディレクトリ構造</h2>
-        <p>Antigravityを導入したプロジェクトのルートディレクトリは、以下の構成を標準とします。</p>
+        <h2>📂 標準的なフォルダの並び</h2>
+        <p>AIと一緒に開発をするときは、以下のような形にファイルを整理しておくのがおすすめです。</p>
         
-        <pre class="tree">
-MyProject/
-├── .antigravity_config/    <span class="tree-comment">// 配布用テンプレートフォルダ</span>
-├── .vscode/               <span class="tree-comment">// エディタ固有の設定</span>
-│   └── settings.json      <span class="tree-comment">// テレメトリ無効化など</span>
-├── src/                   <span class="tree-comment">// ソースコード本体</span>
-├── docs/                  <span class="tree-comment">// 設計書・仕様書</span>
-├── AGENTS.md              <span class="tree-comment">// エージェント定義（重要）</span>
-├── instructions.md        <span class="tree-comment">// AIへのタスク指示書</span>
-├── .env                   <span class="tree-comment">// 機密情報（AIから秘匿）</span>
-└── .gitignore             <span class="tree-comment">// AIの検索対象外設定</span></pre>
-
-        <div class="alert">
-            <strong>重要:</strong> ワークスペースの「ルート」をAntigravityに設定することで、AIはこれらすべてのファイルを相互に関連付けて解析できるようになります。
+        <div class="file-tree">
+            <div><span class="folder">MyProject/</span> <span class="comment">(あなたの作業用フォルダ)</span></div>
+            <div>├── <span class="folder">src/</span> <span class="comment">(プログラム本体を入れる場所)</span></div>
+            <div>├── <span class="file">AGENTS.md</span> <span class="comment">(AIの性格・ルール)</span></div>
+            <div>├── <span class="file">instructions.md</span> <span class="comment">(AIへのお願い書)</span></div>
+            <div>└── <span class="folder">.antigravity_config/</span> <span class="comment">(大事な設定の予備)</span></div>
         </div>
     </div>
 
     <div class="structure-card">
-        <h2>主要ファイルの役割</h2>
-        <ul class="file-list">
-            <li class="file-item">
-                <div class="file-name">AGENTS.md</div>
-                <div class="file-desc">プロジェクトのルートに配置。AIが「自分は何者か」「どのようなコーディング規約を守るべきか」を判断するための最優先ファイルです。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">instructions.md</div>
-                <div class="file-desc">AIに対する具体的な作業依頼を記述します。複雑なタスクを依頼する際、AIはこのファイルを読み込んで実装の拠り所とします。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">.vscode/settings.json</div>
-                <div class="file-desc">ワークスペース単位でのエディタ動作（テレメトリのオフ、自動保存の設定など）を定義します。</div>
-            </li>
-            <li class="file-item">
-                <div class="file-name">.env / .gitignore</div>
-                <div class="file-desc">機密情報の分離と、AIに読み込ませたくないフォルダ（node_modules等）を除外するために適切に設定する必要があります。</div>
-            </li>
-        </ul>
+        <h2>📄 各ファイルの役割</h2>
+        <div class="file-item">
+            <div class="file-icon">🤖</div>
+            <div class="file-info">
+                <h4>AGENTS.md</h4>
+                <p>AIに「あなたはベテランエンジニアです」「日本語で答えてください」と教え込むためのファイルです。これを置いておくだけで、AIの回答がグッと頼もしくなります。</p>
+            </div>
+        </div>
+        <div class="file-item">
+            <div class="file-icon">📝</div>
+            <div class="file-info">
+                <h4>instructions.md</h4>
+                <p>「こんな機能を作って！」という具体的な依頼を書く場所です。ノートにメモを書く感覚で、日本語で自由にやりたいことを書いてください。</p>
+            </div>
+        </div>
+        <div class="file-item">
+            <div class="file-icon">🗝️</div>
+            <div class="file-info">
+                <h4>.env</h4>
+                <p>パスワードなどの秘密の情報を隠しておくためのファイルです。AIに勝手に見られないよう、安全に保管する役割があります。</p>
+            </div>
+        </div>
     </div>
 
     <div class="structure-card">
-        <h2>設定の適用範囲</h2>
-        <p>Antigravityの設定は、以下の2つのレベルで管理されます。</p>
-        <ul>
-            <li><strong>Global（グローバル）:</strong> エディタ全体の設定。日本語化ルール（User Rules）などはここで行います。</li>
-            <li><strong>Workspace（ワークスペース）:</strong> プロジェクトごとの設定。<code>AGENTS.md</code> などのファイルベースの設定がこれにあたります。</li>
-        </ul>
-        <p style="margin-top: 1rem;">基本的には「ワークスペース設定（AGENTS.md等）」が優先され、プロジェクトごとに最適なAIエージェントが構築されます。</p>
+        <h2>💡 どこに設定すればいいの？</h2>
+        <p>基本的には、<strong>「一番外側のフォルダ」</strong>にこれらのファイルを置いておけばOKです。</p>
+        <p style="margin-top: 1rem;">Antigravityはフォルダの中を自動的にスキャンして、「あ、ここにお願い書があるな」「あ、このルールを守ればいいんだな」と自分で判断してくれます。あなたは決まった場所にファイルを置くだけで大丈夫です！</p>
     </div>
 
     <footer>
-        &copy; 2026 Antigravity Support Team | System Architecture
+        &copy; 2026 Antigravity チーム | 整理整頓は、AI開発の第一歩。
     </footer>
-</div>
+</main>
 
 </body>
 </html>

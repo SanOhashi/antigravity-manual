@@ -3,233 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用語説明 - Antigravity 総合運用ガイド</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>ことばの意味 - Antigravity はじめてガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-bg: #1e293b;
             --accent: #10b981;
-            --danger: #ef4444;
-            --nav-width: 260px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            margin: 0;
             display: flex;
-        }
-
-        /* Global Sidebar (Left) */
-        .global-sidebar {
-            width: var(--nav-width);
-            height: 100vh;
-            background: #111827;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-        }
-
-        .sidebar-logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 2.5rem;
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-menu { list-style: none; }
-        .nav-item { margin-bottom: 0.5rem; }
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            transition: all 0.2s;
-        }
-        .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
-        .nav-link.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 600; }
-
-        /* Main Content */
-        .main-wrapper {
-            margin-left: var(--nav-width);
-            flex: 1;
             min-height: 100vh;
+        }
+
+        /* 左サイドバー */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            padding: 2rem;
+        }
+
+        .sidebar h2 { font-size: 1.2rem; margin-bottom: 2rem; color: #818cf8; }
+        .nav-menu { list-style: none; padding: 0; margin: 0; }
+        .nav-item { margin-bottom: 0.75rem; }
+        .nav-link { 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            display: block; 
+            padding: 0.75rem 1rem; 
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .nav-link:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-link.active { background: var(--primary); color: white; font-weight: 600; }
+
+        /* メインコンテンツ */
+        .main {
+            margin-left: 260px;
+            flex: 1;
             padding: 4rem;
-            max-width: 1000px;
+            max-width: 900px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #1e293b; }
+        .intro { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; }
 
-        .glossary-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
+        .term-group { margin-bottom: 4rem; }
+        .category-name { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; display: block; }
 
-        .term-section {
+        .term-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s;
-        }
-
-        .term-section:hover {
-            transform: translateY(-2px);
-            border-color: rgba(99, 102, 241, 0.3);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
         }
 
         dt {
             font-size: 1.4rem;
             font-weight: 700;
-            color: #818cf8;
-            margin-bottom: 0.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 0.75rem;
         }
 
-        .badge {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
+        dt::before {
+            content: "";
+            width: 8px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
         }
 
-        dd { margin-left: 0; color: #cbd5e1; }
-        dd strong { color: #fff; }
+        dd { margin-left: 0; color: #475569; line-height: 1.7; }
+        .keyword { background: #e0e7ff; color: #4338ca; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 600; font-size: 0.9em; }
 
-        .category-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin: 3rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+        footer { margin-top: 6rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 2rem; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
 
-<aside class="global-sidebar">
-    <div class="sidebar-logo">Antigravity Guide</div>
+<aside class="sidebar">
+    <h2>Antigravity 入門</h2>
     <nav>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="antigravity_guide_site.html" class="nav-link">🏠 総合運用ガイド</a>
-            </li>
-            <li class="nav-item">
-                <a href="glossary.html" class="nav-link active">📖 用語説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="structure.html" class="nav-link">🏗️ 構造説明</a>
-            </li>
-            <li class="nav-item">
-                <a href="languages.html" class="nav-link">💻 対応言語一覧</a>
-            </li>
+            <li class="nav-item"><a href="antigravity_guide_site.html" class="nav-link">🏠 はじめての準備</a></li>
+            <li class="nav-item"><a href="glossary.html" class="nav-link active">📖 ことばの意味</a></li>
+            <li class="nav-item"><a href="structure.html" class="nav-link">📂 フォルダの中身</a></li>
         </ul>
     </nav>
 </aside>
 
-<div class="main-wrapper">
-    <h1>用語説明</h1>
-    <p style="color: var(--text-muted); margin-bottom: 2rem;">Antigravityを使いこなすために必要な、独自機能やAI開発の重要概念を解説します。</p>
+<main class="main">
+    <h1>ことばの意味</h1>
+    <p class="intro">Antigravityを使うときによく出てくる言葉を、専門知識がなくても分かるように噛み砕いて説明します。</p>
 
-    <div class="category-title">主要な構成ファイル</div>
-    <dl class="glossary-grid">
-        <div class="term-section">
-            <dt>AGENTS.md <span class="badge">独自設定</span></dt>
+    <div class="term-group">
+        <span class="category-name">大事なファイルの名前</span>
+        
+        <div class="term-card">
+            <dt>AGENTS.md（エージェント設定）</dt>
             <dd>
-                <p>AIエージェントの<strong>「魂」</strong>とも言える設定ファイルです。プロジェクトごとに作成し、AIの役割（熟練エンジニア等）、従うべきルール、推奨するコードの書き方を定義します。これにより、AIがプロジェクトの文脈を完璧に理解した回答をするようになります。</p>
+                AIの<strong>「性格や仕事のルール」</strong>を決めるファイルです。「あなたは優しい先生です」「コードは必ず日本語で説明してください」といった指示を書くことで、AIがあなたの好みに合わせて動くようになります。
             </dd>
         </div>
-        <div class="term-section">
-            <dt>instructions.md <span class="badge">指示書</span></dt>
-            <dd>
-                <p>人からAIへの<strong>「具体的な仕事の依頼書」</strong>です。チャットでの指示は流れて消えてしまいますが、ファイルとして残すことで、複雑な要件や背景情報をAIがいつでも正確に参照できるようになります。</p>
-            </dd>
-        </div>
-    </dl>
 
-    <div class="category-title">運用・機能概念</div>
-    <dl class="glossary-grid">
-        <div class="term-section">
-            <dt>Planning Mode (計画モード) <span class="badge">機能</span></dt>
+        <div class="term-card">
+            <dt>instructions.md（お願い書）</dt>
             <dd>
-                <p>AIが勝手にコードを書き換える前に、まず<strong>「実装の設計図（Implementation Plan）」</strong>を提示する仕組みです。人間が「OK」を出すまで実行されないため、意図しない破壊的な変更を防ぐことができます。</p>
+                AIへの<strong>「具体的な依頼内容」</strong>を書くノートのようなものです。口頭（チャット）で伝えるよりも、このファイルに書くほうがAIは正確に、かつ何度も読み返して仕事をしてくれます。
             </dd>
         </div>
-        <div class="term-section">
-            <dt>Context (コンテキスト) <span class="badge">AI概念</span></dt>
-            <dd>
-                <p>AIが現在把握している<strong>「前後の脈絡や状況」</strong>のことです。Antigravityはファイルの中身だけでなく、ディレクトリ構造や過去のチャット履歴をこの「コンテキスト」として読み込み、より正確な提案を行います。</p>
-            </dd>
-        </div>
-        <div class="term-section">
-            <dt>Artifact (アーティファクト) <span class="badge">成果物</span></dt>
-            <dd>
-                <p>AIとの対話の結果として生成された、<strong>「形のある成果物」</strong>です。ソースコードはもちろん、この用語ページのようなドキュメント、計画書、ターミナルでの実行結果などがこれに含まれます。</p>
-            </dd>
-        </div>
-        <div class="term-section">
-            <dt>Auto-Approve (自動承認) <span class="badge">設定</span></dt>
-            <dd>
-                <p>AIが特定のツール（ファイル読み取り等）を使う際、<strong>人間の許可を待たずに実行</strong>させる設定です。閲覧などの安全な操作を自動承認にすることで、開発のテンポを上げることができます。</p>
-            </dd>
-        </div>
-    </dl>
+    </div>
 
-    <div class="category-title">リスク管理・セキュリティ</div>
-    <dl class="glossary-grid">
-        <div class="term-section">
-            <dt>Hallucination (ハルシネーション) <span class="badge">リスク</span></dt>
+    <div class="term-group">
+        <span class="category-name">AIの動きについて</span>
+        
+        <div class="term-card">
+            <dt>Planning Mode（計画モード）</dt>
             <dd>
-                <p>AIが自信満々に<strong>「もっともらしい嘘（捏造）」</strong>を言う現象です。存在しないライブラリの使用を提案したり、過去の情報を現在のことのように話したりすることがあります。<strong>「AIは間違えることがある」</strong>という前提でのレビューが必須です。</p>
+                AIが勝手に作業を始める前に、まず<strong>「これからこうやって作りますね」という下書き（計画書）</strong>を見せてくれるモードです。人間が「それでOK！」とボタンを押すまでAIは勝手にファイルをいじらないので、安心です。
             </dd>
         </div>
-        <div class="term-section">
-            <dt>Telemetry (テレメトリ) <span class="badge">セキュリティ</span></dt>
+
+        <div class="term-card">
+            <dt>Context（コンテキスト）</dt>
             <dd>
-                <p>ソフトウェアが<strong>「裏側でサーバーに送る利用データ」</strong>のことです。個人情報や機密コードが漏れるリスクを最小化するため、企業利用ではこれを「オフ」にすることが業界標準のベストプラクティスです。</p>
+                AIが今、<strong>「どれくらい状況を把握しているか」</strong>という範囲のことです。Antigravityは、あなたが書いたファイルだけでなく、周りのファイルの繋がりや過去の会話もすべて「状況」として読み取って賢い提案をしてくれます。
             </dd>
         </div>
-    </dl>
+
+        <div class="term-card">
+            <dt>Hallucination（ハルシネーション）</dt>
+            <dd>
+                AIが<strong>「自信満々に、もっともらしい嘘をつく」</strong>ことです。専門用語では難しいですが、簡単に言えば「知ったかぶり」です。AIの言葉は常に「本当かな？」と疑って、最後は人間が確認することが大切です。
+            </dd>
+        </div>
+    </div>
+
+    <div class="term-group">
+        <span class="category-name">セキュリティ</span>
+        
+        <div class="term-card">
+            <dt>Telemetry（データの送信）</dt>
+            <dd>
+                ソフトの利用状況を開発元に送る機能のことです。会社の大切なデータが外に漏れないよう、<strong>「オフ（送らない）」</strong>に設定するのが一番安全な使い方です。
+            </dd>
+        </div>
+    </div>
 
     <footer>
-        &copy; 2026 Antigravity Support Team | Confidential
+        &copy; 2026 Antigravity チーム | 難しい言葉を、ワクワクする言葉に。
     </footer>
-</div>
+</main>
 
 </body>
 </html>
